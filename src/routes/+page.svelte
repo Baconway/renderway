@@ -2,6 +2,6 @@
 	<h1>osu! profile render thingamabob</h1>
 	<form class="flex flex-col" method="POST" autocomplete="off">
 		<input type="text" name="name" />
-		<input type="submit" />
+		<button> test button</button>
 	</form>
 </div>
