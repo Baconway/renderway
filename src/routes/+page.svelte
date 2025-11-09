@@ -1,12 +1,44 @@
+<script lang="ts">
+	import * as osu from 'osu-api-v2-js';
+	import type { PageProps } from './$types';
+
+	let { form }: PageProps = $props();
+</script>
+
+{#snippet checkbox(gamemode: string, modeName: string, defaultChosen: boolean | null)}
+	<div class="flex flex-row items-center justify-center">
+		{#if defaultChosen}
+			<input type="radio" name="ruleset" checked value={gamemode} />
+		{:else}
+			<input type="radio" name="ruleset" value={gamemode} />
+		{/if}
+
+		<label for="gamemode name">{modeName}</label>
+	</div>
+{/snippet}
+
 <div class="flex flex-col items-center justify-center gap-5 text-white">
 	<h1>osu! profile render thingamabob</h1>
 	<form class="flex flex-col" method="POST" autocomplete="off" action="?/submit">
+		<label for="username showcase">
+			Username Inputted:
+			{#if form?.username}
+				{form?.username}
+			{/if}
+		</label>
 		<input
-			class="border-2 border-t-0 border-r-0 border-l-0 border-b-white bg-transparent text-black focus:outline-amber-500"
+			id="nameInput"
+			class="border-2 border-white bg-transparent text-black outline-transparent focus:outline-none"
 			type="text"
 			name="name"
 		/>
-		<button>test button</button>
+		<div class="flex flex-row gap-5">
+			{@render checkbox('osu', 'osu!', true)}
+			{@render checkbox('mania', 'osu!mania', false)}
+			{@render checkbox('taiko', 'osu!taiko', false)}
+			{@render checkbox('fruits', 'osu!catch', false)}
+		</div>
+		<button type="submit">test button</button>
 	</form>
 
 	<div
@@ -18,4 +50,6 @@
 		<img alt="template" />
 		<img alt="template" />
 	</div>
+
+	<a href="/render">Generate</a>
 </div>

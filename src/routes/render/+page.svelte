@@ -1,4 +1,5 @@
 <script lang="ts">
 </script>
 
-<svg> </svg>
+<svg></svg>
+<p class="text-white">djiwqhdjiqhdiuqhi</p>
