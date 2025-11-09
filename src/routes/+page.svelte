@@ -5,7 +5,7 @@
 	let { form }: PageProps = $props();
 </script>
 
-{#snippet checkbox(gamemode: string, modeName: string, defaultChosen: boolean | null)}
+{#snippet checkbox(gamemode: osu.Ruleset, modeName: string, defaultChosen: boolean | null)}
 	<div class="flex flex-row items-center justify-center">
 		{#if defaultChosen}
 			<input type="radio" name="ruleset" checked value={gamemode} />
@@ -24,6 +24,7 @@
 			Username Inputted:
 			{#if form?.username}
 				{form?.username}
+				{console.log(form)}
 			{/if}
 		</label>
 		<input
@@ -33,10 +34,10 @@
 			name="name"
 		/>
 		<div class="flex flex-row gap-5">
-			{@render checkbox('osu', 'osu!', true)}
-			{@render checkbox('mania', 'osu!mania', false)}
-			{@render checkbox('taiko', 'osu!taiko', false)}
-			{@render checkbox('fruits', 'osu!catch', false)}
+			{@render checkbox(osu.Ruleset.osu, 'osu!', true)}
+			{@render checkbox(osu.Ruleset.mania, 'osu!mania', false)}
+			{@render checkbox(osu.Ruleset.taiko, 'osu!taiko', false)}
+			{@render checkbox(osu.Ruleset.fruits, 'osu!catch', false)}
 		</div>
 		<button type="submit">test button</button>
 	</form>
@@ -46,10 +47,10 @@
 	md:flex-row
 	"
 	>
-		<img alt="template" />
-		<img alt="template" />
-		<img alt="template" />
+		<button><img alt="template" /></button>
+		<button><img alt="template" /></button>
+		<button><img alt="template" /></button>
 	</div>
 
-	<a href="/render">Generate</a>
+	<a href="/render" target="_blank">Generate</a>
 </div>

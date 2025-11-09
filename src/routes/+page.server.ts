@@ -7,8 +7,7 @@ export const actions = {
 	submit: async ({ request }) => {
 		const data: FormData = await request.formData();
 		const username = data.get('name') as string;
-		const ruleset = data.get('ruleset') as string;
-
+		const ruleset = Number(data.get('ruleset')) as number;
 		return await testcall(username, ruleset);
 	}
 } satisfies Actions;
