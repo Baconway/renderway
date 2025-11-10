@@ -21,10 +21,11 @@
 	<h1>osu! profile render thingamabob</h1>
 	<form class="flex flex-col" method="POST" autocomplete="off" action="?/submit">
 		<label for="username showcase">
-			Username Inputted:
 			{#if form?.username}
+				Username Inputted:
 				{form?.username}
-				{console.log(form)}
+			{:else}
+				Enter A Valid Username:
 			{/if}
 		</label>
 		<input
@@ -52,5 +53,11 @@
 		<button><img alt="template" /></button>
 	</div>
 
-	<a href="/render" target="_blank">Generate</a>
+	{#if form}
+		<a
+			class=""
+			href={`/render/?user=${encodeURIComponent(form?.username as string)}&mode=${encodeURIComponent(form?.mode as string)}`}
+			target="_blank">Generate</a
+		>
+	{/if}
 </div>

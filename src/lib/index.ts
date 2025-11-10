@@ -12,10 +12,16 @@ const KeyToRuleset: Record<number, osu.Ruleset> = {
 	3: osu.Ruleset.mania
 };
 
-export async function testcall(username: string, gamemode: number) {
+export async function validationCheck(username: string, gamemode: number) {
+	//checks if name returns actual player
 	try {
 		const user = await api.getUser(username, KeyToRuleset[gamemode]);
-		return { success: true, country: user.country, username: user.username, mode: user.playmode };
+		return {
+			success: true,
+			country: user.country,
+			username: user.username,
+			mode: user.playmode
+		};
 	} catch (error) {
 		return { success: false };
 	}
