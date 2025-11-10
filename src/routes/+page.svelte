@@ -5,7 +5,7 @@
 	let { form }: PageProps = $props();
 </script>
 
-{#snippet checkbox(gamemode: osu.Ruleset, modeName: string, defaultChosen: boolean | null)}
+{#snippet checkbox(gamemode: string, modeName: string, defaultChosen: boolean | null)}
 	<div class="flex flex-row items-center justify-center">
 		{#if defaultChosen}
 			<input type="radio" name="ruleset" checked value={gamemode} />
@@ -21,7 +21,7 @@
 	<h1>osu! profile render thingamabob</h1>
 	<form class="flex flex-col" method="POST" autocomplete="off" action="?/submit">
 		<label for="username showcase">
-			{#if form?.username}
+			{#if form?.success}
 				Username Inputted:
 				{form?.username}
 			{:else}
@@ -35,10 +35,10 @@
 			name="name"
 		/>
 		<div class="flex flex-row gap-5">
-			{@render checkbox(osu.Ruleset.osu, 'osu!', true)}
-			{@render checkbox(osu.Ruleset.mania, 'osu!mania', false)}
-			{@render checkbox(osu.Ruleset.taiko, 'osu!taiko', false)}
-			{@render checkbox(osu.Ruleset.fruits, 'osu!catch', false)}
+			{@render checkbox('osu', 'osu!', true)}
+			{@render checkbox('mania', 'osu!mania', false)}
+			{@render checkbox('taiko', 'osu!taiko', false)}
+			{@render checkbox('fruits', 'osu!catch', false)}
 		</div>
 		<button type="submit">test button</button>
 	</form>
@@ -53,7 +53,7 @@
 		<button><img alt="template" /></button>
 	</div>
 
-	{#if form}
+	{#if form?.success}
 		<a
 			class=""
 			href={`/render/?user=${encodeURIComponent(form?.username as string)}&mode=${encodeURIComponent(form?.mode as string)}`}

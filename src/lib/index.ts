@@ -5,22 +5,23 @@ import { OSU_CLIENT_SECRET } from '$env/static/private';
 const api = await osu.API.createAsync(45354, OSU_CLIENT_SECRET);
 api.refresh_token_on_expires = true;
 
-const KeyToRuleset: Record<number, osu.Ruleset> = {
-	0: osu.Ruleset.osu,
-	1: osu.Ruleset.taiko,
-	2: osu.Ruleset.fruits,
-	3: osu.Ruleset.mania
+const keyToRuleset: Record<string, osu.Ruleset> = {
+	osu: osu.Ruleset.osu,
+	taiko: osu.Ruleset.taiko,
+	fruits: osu.Ruleset.fruits,
+	mania: osu.Ruleset.mania
 };
 
-export async function validationCheck(username: string, gamemode: number) {
+export async function getUser(username: string, gamemode: string) {
 	//checks if name returns actual player
+	const rulesetChosen = keyToRuleset[gamemode];
 	try {
-		const user = await api.getUser(username, KeyToRuleset[gamemode]);
+		const user = await api.getUser(username, rulesetChosen);
 		return {
 			success: true,
-			country: user.country,
 			username: user.username,
-			mode: user.playmode
+			mode: gamemode,
+			fullData: user
 		};
 	} catch (error) {
 		return { success: false };

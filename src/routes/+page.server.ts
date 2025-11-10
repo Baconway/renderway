@@ -1,13 +1,14 @@
 import * as osu from 'osu-api-v2-js'; //just to get enum access
 import type { Actions } from './$types';
-import { validationCheck } from '$lib';
+import { getUser } from '$lib';
 
 export const actions = {
 	submit: async ({ request }) => {
 		const data: FormData = await request.formData();
+		console.log(data);
 		const username = data.get('name') as string;
-		const ruleset = Number(data.get('ruleset')) as number;
+		const ruleset = data.get('ruleset') as string;
 
-		return await validationCheck(username, ruleset);
+		return await getUser(username, ruleset);
 	}
 } satisfies Actions;
