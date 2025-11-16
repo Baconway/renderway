@@ -37,6 +37,7 @@
 		"vite": "^7.1.7"
 	},
 	"dependencies": {
+		"@davidmarkclements/hsl-to-hex": "^1.0.2",
 		"osu-api-v2-js": "^2.1.5"
 	}
 }

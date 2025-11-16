@@ -1,8 +1,7 @@
 <script lang="ts">
 	import type { PageProps } from './$types';
+
 	let { data }: PageProps = $props();
-	console.log(data.profile_colour);
-	const profileColor = `hsl(${data.profile_hue}, 100%, 0%)`;
 </script>
 
 {#snippet card()}
@@ -13,11 +12,19 @@
 
 		<g
 			><rect width="600" height="125" y="95"></rect>
+			<rect
+				x="9"
+				y="59"
+				width="130"
+				height="130"
+				fill={data.profile_color}
+				clip-path="inset(0% round 6px)"
+			></rect>
 			<image
 				x="10"
-				y="95"
-				width="125"
-				height="125"
+				y="60"
+				width="128"
+				height="128"
 				href={data.avatar_url}
 				clip-path="inset(0% round 6px)"
 			></image>
