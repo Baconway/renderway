@@ -28,6 +28,12 @@ export async function getUser(username: string, gamemode: string) {
 	}
 }
 
+export async function getCountryFlag(countryCode: string) {
+	const fetchCall = await fetch(`https://restcountries.com/v2/alpha/${countryCode}?fields=flag`);
+	const data = await fetchCall.json();
+	return await data;
+}
+
 export function hslToHex(h: number, s: number, l: number) {
 	l /= 100;
 	const a = (s * Math.min(l, 1 - l)) / 100;
