@@ -5,7 +5,6 @@ import { getUser } from '$lib';
 export const actions = {
 	submit: async ({ request }) => {
 		const data: FormData = await request.formData();
-		console.log(data);
 		const username = data.get('name') as string;
 		const ruleset = data.get('ruleset') as string;
 

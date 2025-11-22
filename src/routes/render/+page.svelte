@@ -6,21 +6,17 @@
 
 {#snippet card()}
 	<svg width="600" height="400">
-		<rect width="600" height="400" fill={data.card_color}></rect>
-
-		<image x="0" y="0" width="600" href={data.cover?.custom_url}></image>
-
+		<!--card bg, cover-->
 		<g>
+			<rect width="600" height="400" rx="10" ry="10" fill={data.card_color}></rect>
+
+			<image x="0" y="0" width="600" clip-path="inset(0% round 10px)" href={data.cover?.custom_url}
+			></image>
+		</g>
+		<g>
+			<!--profile bg, avatar-->
 			<g>
 				<rect width="600" height="110" y="55" fill={data.profile_color}></rect>
-				<!--<rect
-					x="8.5"
-					y="58.5"
-					width="103"
-					height="103"
-					fill={data.profile_color}
-					clip-path="inset(0% round 6px)"
-				></rect>-->
 				<image
 					x="10"
 					y="60"
@@ -30,21 +26,50 @@
 					clip-path="inset(0% round 6px)"
 				></image>
 			</g>
+			<!--username, country, rank, peak rank-->
 			<g>
-				<!--username, country, rank, peak rank-->
-
 				<text fill="white" x="135" y="90" font-size="25">{data.username}</text>
 				<image
 					width="30"
 					height="20"
-					x="136"
-					y="100"
+					x="255"
+					y="75"
 					href={data.flag}
 					clip-path="inset(0% round 3px)"
 				></image>
-				<text fill="white" x="175" y="117" font-size="18">{data.country}</text>
+				<image
+					width="40"
+					height="20"
+					x="290"
+					y="75"
+					href={data.teamFlag}
+					clip-path="inset(0% round 3px)"
+				></image>
+				<text x="135" y="125" fill="white">Global Rank</text>
+				<text x="135" y="150" fill="white" font-size="23">#{data.currentRank}</text>
+				<text x="250" y="125" fill="white">Peak Rank</text>
+				<text x="250" y="150" fill="white" font-size="23">#{data.peakRank}</text>
+			</g>
+			<!--gamemode, social media, total pp-->
+			<g>
+				<image x="375" y="75" width="20" height="20" href="/mode/mode-{data.modeRendering}.png"
+				></image>
+				<text x="400" y="89.5" font-size="15" fill="white">{data.modeName}</text>
+				<image class="invert" x="375" y="105" width="20" height="20" href="/discord.svg"></image>
+				<text x="400" y="120" font-size="15" fill="white">{data.discord}</text>
+				<text x="375" y="150" fill="white" font-size="18">{data.pp}pp</text>
+			</g>
+			<!--top play, level, playtime-->
+			<g>
+				<text x="25" y="200" font-size="18" fill="white">Level: {data.level}</text>
+				<text x="25" y="230" font-size="18" fill="white">Playtime: </text>
+				<text x="25" y="255" font-size="18" fill="white">{data.playtime} hours</text>
+				<text x="25" y="285" font-size="18" fill="white">Top Play:</text>
+				<text x="25" y="310" font-size="18" fill="white">{data.bestPlay}</text>
 			</g>
 		</g>
+		<!--dan achievements-->
+		<g><text x="125" y="200" font-size="18" fill="white">Highest Dan: </text> </g>
 	</svg>
 {/snippet}
 

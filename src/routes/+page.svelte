@@ -1,5 +1,4 @@
 <script lang="ts">
-	import * as osu from 'osu-api-v2-js';
 	import type { PageProps } from './$types';
 
 	let { form }: PageProps = $props();
@@ -30,7 +29,7 @@
 		</label>
 		<input
 			id="nameInput"
-			class="border-2 border-white bg-transparent text-black outline-transparent focus:outline-none"
+			class="border-2 border-white bg-transparent text-white outline-transparent focus:outline-none"
 			type="text"
 			name="name"
 		/>

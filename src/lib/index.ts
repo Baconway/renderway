@@ -12,16 +12,31 @@ const keyToRuleset: Record<string, osu.Ruleset> = {
 	mania: osu.Ruleset.mania
 };
 
+const playmodeToGamemodeName: Record<string, string> = {
+	osu: 'osu!',
+	taiko: 'osu!taiko',
+	catch: 'osu!catch',
+	mania: 'osu!mania'
+};
+
 export async function getUser(username: string, gamemode: string) {
 	//checks if name returns actual player
 	const rulesetChosen = keyToRuleset[gamemode];
 	try {
 		const user = await api.getUser(username, rulesetChosen);
+		const teamLookup = await api.lookupUsers([user.id]);
+		const TopPlay = await api.getUserScores(user.id, 'best', rulesetChosen, {
+			lazer: false,
+			fails: false
+		});
 		return {
 			success: true,
 			username: user.username, //username, mode is for the form, userdata is for card
 			mode: gamemode,
-			fullData: user
+			modeName: playmodeToGamemodeName[gamemode],
+			fullData: user,
+			team: teamLookup[0].team,
+			userTopPlay: TopPlay[0]
 		};
 	} catch (error) {
 		return { success: false };
