@@ -8,9 +8,11 @@ export const load: PageServerLoad = async ({ url }) => {
 
 	const userData = await getUser(
 		url.searchParams.get('user') as string,
-		url.searchParams.get('mode') as string
+		url.searchParams.get('mode') as string,
+		url.searchParams.get('dan') as string,
+		undefined
 	);
-
+	console.log(userData);
 	return {
 		cover: userData.fullData?.cover,
 		avatar_url: userData.fullData?.avatar_url,
@@ -18,6 +20,8 @@ export const load: PageServerLoad = async ({ url }) => {
 		flag: flagImage.flag,
 		teamFlag: userData.team?.flag_url,
 		country: userData.fullData?.country.name,
+		danIcon: `/dan/D${userData.dan}.png`,
+		danSS: userData.danSS,
 
 		username: userData.fullData?.username,
 		currentRank: userData.fullData?.statistics.global_rank,

@@ -40,6 +40,26 @@
 			{@render checkbox('fruits', 'osu!catch', false)}
 		</div>
 		<button type="submit">test button</button>
+		<select class="text-black" name="dan">
+			<option value="1">1st Dan</option>
+			<option value="2">2nd Dan</option>
+			<option value="3">3rd Dan</option>
+			<option value="4">4th Dan</option>
+			<option value="5">5th Dan</option>
+			<option value="6">6th Dan</option>
+			<option value="7">7th Dan</option>
+			<option value="8">8th Dan</option>
+			<option value="9">9th Dan</option>
+			<option value="10">10th Dan</option>
+			<option value="Alpha">Alpha Dan</option>
+			<option value="Beta">Beta Dan</option>
+			<option value="Gamma">Gamma Dan</option>
+			<option value="Delta">Delta Dan</option>
+			<option value="Epsilon">Epsilon Dan</option>
+		</select>
+		<input name="danScreenshot" class="text-black" type="url" /><label for="screenshot link"
+			>screenshot</label
+		>
 	</form>
 
 	<div
@@ -55,7 +75,7 @@
 	{#if form?.success}
 		<a
 			class=""
-			href={`/render/?user=${encodeURIComponent(form?.username as string)}&mode=${encodeURIComponent(form?.mode as string)}`}
+			href={`/render/?user=${encodeURIComponent(form?.username as string)}&mode=${encodeURIComponent(form?.mode as string)}&dan=${encodeURIComponent(form?.dan as string)}`}
 			target="_blank">Generate</a
 		>
 	{/if}

@@ -8,7 +8,7 @@
 	<svg width="600" height="400">
 		<!--card bg, cover-->
 		<g>
-			<rect width="600" height="400" rx="10" ry="10" fill={data.card_color}></rect>
+			<rect width="600" height="340" rx="10" ry="10" fill={data.card_color}></rect>
 
 			<image x="0" y="0" width="600" clip-path="inset(0% round 10px)" href={data.cover?.custom_url}
 			></image>
@@ -69,7 +69,29 @@
 			</g>
 		</g>
 		<!--dan achievements-->
-		<g><text x="125" y="200" font-size="18" fill="white">Highest Dan: </text> </g>
+		<g>
+			<text x="125" y="195" font-size="18" fill="white">4K Achievements: </text>
+			<text x="150" y="225" font-size="18" fill="white">Reformed Dan: </text>
+			<a href={data.danSS} target="_blank" title="screenshot"
+				><image width="25" height="25" x="272" y="206" href={data.danIcon}></image></a
+			>
+			<text x="150" y="265" font-size="18" fill="white">LN Dan:</text>
+			<a href={data.danSS} target="_blank" title="screenshot"
+				><image width="25" height="25" x="215" y="246" href={data.danIcon}></image></a
+			>
+
+			<text x="375" y="195" font-size="18" fill="white">7K Achievements: </text>
+			<text x="400" y="225" font-size="18" fill="white">Stellium Dan: </text>
+			<a href={data.danSS} target="_blank" title="screenshot"
+				><image width="25" height="25" x="507" y="206" href={data.danIcon}></image></a
+			>
+		</g>
+
+		<g>
+			<!--footer-->
+			<rect width="600" height="40" x="0" y="325" fill={data.profile_color} rx="10" ry="10"></rect>
+			<text x="425" y="350" fill="white">@Made by Baconway</text>
+		</g>
 	</svg>
 {/snippet}
 

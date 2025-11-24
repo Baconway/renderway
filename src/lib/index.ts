@@ -19,7 +19,14 @@ const playmodeToGamemodeName: Record<string, string> = {
 	mania: 'osu!mania'
 };
 
-export async function getUser(username: string, gamemode: string) {
+let screenshotLink: string;
+
+export async function getUser(
+	username: string,
+	gamemode: string,
+	danNumber: string | undefined,
+	danScreenshot: string | undefined
+) {
 	//checks if name returns actual player
 	const rulesetChosen = keyToRuleset[gamemode];
 	try {
@@ -29,6 +36,11 @@ export async function getUser(username: string, gamemode: string) {
 			lazer: false,
 			fails: false
 		});
+
+		if (danScreenshot != undefined) {
+			screenshotLink = danScreenshot;
+		}
+
 		return {
 			success: true,
 			username: user.username, //username, mode is for the form, userdata is for card
@@ -36,7 +48,9 @@ export async function getUser(username: string, gamemode: string) {
 			modeName: playmodeToGamemodeName[gamemode],
 			fullData: user,
 			team: teamLookup[0].team,
-			userTopPlay: TopPlay[0]
+			userTopPlay: TopPlay[0],
+			dan: danNumber,
+			danSS: screenshotLink
 		};
 	} catch (error) {
 		return { success: false };
