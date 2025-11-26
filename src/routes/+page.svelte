@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { FocusEventHandler } from 'svelte/elements';
 	import type { PageProps } from './$types';
-	import type { Component } from 'svelte';
 	import { browser } from '$app/environment';
 	import Mania from './optional/mania.svelte';
 

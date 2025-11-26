@@ -42,7 +42,7 @@ export const load: PageServerLoad = async ({ url }) => {
 	const BestPlays = await api.getUserScores(userGET.id, 'best', rulesetGET);
 	const flagImage = await getCountryFlag(userGET.country_code);
 	const teamInfo = await api.getUsers([userGET.id]);
-	console.log(userGET.join_date.getDay(), userGET.join_date.getMonth());
+
 	return {
 		cover: userGET.cover,
 		avatar_url: userGET.avatar_url,
