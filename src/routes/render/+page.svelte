@@ -4,7 +4,7 @@
 	let { data }: PageProps = $props();
 </script>
 
-<svg width="600" height="400">
+<svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
 	<!--card bg, cover-->
 	<g>
 		<rect width="600" height="340" rx="10" ry="10" fill={data.card_color}></rect>
