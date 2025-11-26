@@ -1,46 +1,76 @@
 import type { PageServerLoad } from '../$types';
 import * as osu from 'osu-api-v2-js';
 
-import { getUser, hslToHex, getCountryFlag } from '$lib';
+import { getAPI, hslToHex, getCountryFlag } from '$lib';
+
+const api = getAPI();
+
+const keyToRuleset: Record<string, osu.Ruleset> = {
+	osu: osu.Ruleset.osu,
+	taiko: osu.Ruleset.taiko,
+	fruits: osu.Ruleset.fruits,
+	mania: osu.Ruleset.mania
+};
+
+const playmodeToGamemodeName: Record<string, string> = {
+	osu: 'osu!',
+	taiko: 'osu!taiko',
+	catch: 'osu!catch',
+	mania: 'osu!mania'
+};
+
+const months = [
+	'January',
+	'February',
+	'March',
+	'April',
+	'May',
+	'June',
+	'July',
+	'August',
+	'September',
+	'October',
+	'November',
+	'December'
+];
 
 export const load: PageServerLoad = async ({ url }) => {
-	const flagImage = await getCountryFlag('vn');
+	const danGET = url.searchParams.get('dan');
+	const rulesetGET = keyToRuleset[url.searchParams.get('mode') as string];
+	const userGET = await api.getUser(url.searchParams.get('user') as string, rulesetGET);
 
-	const userData = await getUser(
-		url.searchParams.get('user') as string,
-		url.searchParams.get('mode') as string,
-		url.searchParams.get('dan') as string,
-		undefined
-	);
-	console.log(userData);
+	const BestPlays = await api.getUserScores(userGET.id, 'best', rulesetGET);
+	const flagImage = await getCountryFlag(userGET.country_code);
+	const teamInfo = await api.getUsers([userGET.id]);
+	console.log(userGET.join_date.getDay(), userGET.join_date.getMonth());
 	return {
-		cover: userData.fullData?.cover,
-		avatar_url: userData.fullData?.avatar_url,
+		cover: userGET.cover,
+		avatar_url: userGET.avatar_url,
 
 		flag: flagImage.flag,
-		teamFlag: userData.team?.flag_url,
-		country: userData.fullData?.country.name,
-		danIcon: `/dan/D${userData.dan}.png`,
-		danSS: userData.danSS,
+		teamFlag: teamInfo[0].team?.flag_url,
+		country: userGET.country.name,
+		danIcon: `/dan/D${danGET}.png`,
 
-		username: userData.fullData?.username,
-		currentRank: userData.fullData?.statistics.global_rank,
-		peakRank: userData.fullData?.rank_highest?.rank,
+		username: userGET.username,
+		currentRank: userGET.statistics.global_rank,
+		peakRank: userGET.rank_highest?.rank,
 
-		mode: userData.fullData?.playmode,
-		modeRendering: userData.mode,
-		modeName: userData.modeName,
+		mode: userGET.playmode,
+		modeRendering: url.searchParams.get('mode'),
+		modeName: playmodeToGamemodeName[url.searchParams.get('mode') as string],
 
-		discord: userData.fullData?.discord,
+		discord: userGET.discord,
+		joinDate: `${userGET.join_date.getDate()} - ${months[userGET.join_date.getMonth()]} - ${userGET.join_date.getFullYear()}`,
 
-		level: userData.fullData?.statistics.level.current,
-		playtime: Math.round((userData.fullData?.statistics.play_time as number) / 3600),
+		level: userGET.statistics.level.current,
+		playtime: Math.round((userGET.statistics.play_time as number) / 3600),
 
-		pp: Math.round(userData.fullData?.statistics.pp as number),
-		bestPlay: userData.userTopPlay?.weight?.pp,
+		pp: Math.round(userGET.statistics.pp as number),
+		bestPlay: Math.round(BestPlays[0].pp as number),
 
-		profile_color: hslToHex(userData.fullData?.profile_hue as number, 100, 50),
-		card_color: hslToHex(userData.fullData?.profile_hue as number, 100, 15),
-		username_color: hslToHex(userData.fullData?.profile_hue as number, 100, 70)
+		profile_color: hslToHex(userGET.profile_hue as number, 100, 50),
+		card_color: hslToHex(userGET.profile_hue as number, 100, 15),
+		username_color: hslToHex(userGET.profile_hue as number, 100, 70)
 	};
 };

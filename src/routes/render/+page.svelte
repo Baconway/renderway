@@ -57,7 +57,7 @@
 				<text x="400" y="89.5" font-size="15" fill="white">{data.modeName}</text>
 				<image class="invert" x="375" y="105" width="20" height="20" href="/discord.svg"></image>
 				<text x="400" y="120" font-size="15" fill="white">{data.discord}</text>
-				<text x="375" y="150" fill="white" font-size="18">{data.pp}pp</text>
+				<text x="375" y="150" fill="white" font-size="18">{data.pp} pp</text>
 			</g>
 			<!--top play, level, playtime-->
 			<g>
@@ -65,28 +65,28 @@
 				<text x="25" y="230" font-size="18" fill="white">Playtime: </text>
 				<text x="25" y="255" font-size="18" fill="white">{data.playtime} hours</text>
 				<text x="25" y="285" font-size="18" fill="white">Top Play:</text>
-				<text x="25" y="310" font-size="18" fill="white">{data.bestPlay}</text>
+				<text x="25" y="310" font-size="18" fill="white">{data.bestPlay} pp</text>
 			</g>
 		</g>
 		<!--dan achievements-->
 		<g>
 			<text x="125" y="195" font-size="18" fill="white">4K Achievements: </text>
 			<text x="150" y="225" font-size="18" fill="white">Reformed Dan: </text>
-			<a href={data.danSS} target="_blank" title="screenshot"
-				><image width="25" height="25" x="272" y="206" href={data.danIcon}></image></a
-			>
+			<image width="25" height="25" x="272" y="206" href={data.danIcon}></image>
 			<text x="150" y="265" font-size="18" fill="white">LN Dan:</text>
-			<a href={data.danSS} target="_blank" title="screenshot"
-				><image width="25" height="25" x="215" y="246" href={data.danIcon}></image></a
-			>
+			<image width="25" height="25" x="215" y="246" href={data.danIcon}></image>
 
 			<text x="375" y="195" font-size="18" fill="white">7K Achievements: </text>
-			<text x="400" y="225" font-size="18" fill="white">Stellium Dan: </text>
-			<a href={data.danSS} target="_blank" title="screenshot"
-				><image width="25" height="25" x="507" y="206" href={data.danIcon}></image></a
-			>
+			<text x="400" y="225" font-size="18" fill="white">Dan Phase: </text>
+			<image width="25" height="25" x="507" y="206" href={data.danIcon}></image>
+			<text x="400" y="265" font-size="18" fill="white">Dan Phase: </text>
+			<image width="25" height="25" x="507" y="246" href={data.danIcon}></image>
 		</g>
-
+		<g>
+			<!--random misc info that might change idk-->
+			<text x="125" y="300" font-size="18" fill="white">Joined on: </text>
+			<text x="210" y="300" font-size="18" fill="white">{data.joinDate}</text>
+		</g>
 		<g>
 			<!--footer-->
 			<rect width="600" height="40" x="0" y="325" fill={data.profile_color} rx="10" ry="10"></rect>

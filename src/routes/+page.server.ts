@@ -1,15 +1,20 @@
 import * as osu from 'osu-api-v2-js'; //just to get enum access
 import type { Actions } from './$types';
-import { getUser } from '$lib';
+import { userCheck } from '$lib';
 
 export const actions = {
 	submit: async ({ request }) => {
+		let redirect_url: string = '/render';
+
 		const data: FormData = await request.formData();
 		const username = data.get('name') as string;
-		const ruleset = data.get('ruleset') as string;
-		const danNumber = data.get('dan') as string;
-		const danSS = data.get('danScreenshot') as string;
 
-		return await getUser(username, ruleset, danNumber, danSS);
+		const Result = await userCheck(username);
+
+		if (Result) {
+			redirect_url = `/render/?user=${data.get('name')}&mode=${data.get('ruleset')}&dan=${data.get('dan')}`;
+		}
+
+		return { success: Result, redirectURL: redirect_url };
 	}
 } satisfies Actions;
