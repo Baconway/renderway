@@ -4,7 +4,13 @@
 	let { data }: PageProps = $props();
 </script>
 
-<svg id="svg" width="600" height="400" xmlns="http://www.w3.org/2000/svg">
+<svg
+	id="svg"
+	width="600"
+	height="400"
+	xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+>
 	<style>
 		text {
 			font-family: 'Arimo', sans-serif;
@@ -14,8 +20,7 @@
 	<g>
 		<rect width="600" height="400" rx="10" ry="10" fill={data.card_color}></rect>
 
-		<image x="0" y="0" width="600" clip-path="inset(0% round 10px)" href={data.cover?.custom_url}
-		></image>
+		<image x="0" y="0" width="600" xlink:href={data.cover?.custom_url}></image>
 	</g>
 	<g>
 		<!--profile bg, avatar-->
@@ -26,21 +31,27 @@
 				y="60"
 				width="100"
 				height="100"
-				href={data.avatar_url}
+				xlink:href={data.avatar_url}
 				clip-path="inset(0% round 6px)"
 			></image>
 		</g>
 		<!--username, country, rank, peak rank-->
 		<g>
 			<text fill="white" x="135" y="90" font-size="25">{data.username}</text>
-			<image width="30" height="20" x="255" y="75" href={data.flag} clip-path="inset(0% round 3px)"
+			<image
+				width="30"
+				height="20"
+				x="255"
+				y="75"
+				xlink:href={data.flag}
+				clip-path="inset(0% round 3px)"
 			></image>
 			<image
 				width="40"
 				height="20"
 				x="290"
 				y="75"
-				href={data.teamFlag}
+				xlink:href={data.teamFlag}
 				clip-path="inset(0% round 3px)"
 			></image>
 			<text x="135" y="125" fill="white">Global Rank</text>
@@ -65,7 +76,7 @@
 			<text x="25" y="310" font-size="18" fill="white">{data.bestPlay} pp</text>
 		</g>
 	</g>
-	<image x="100" y="150" width="500" height="225" href={data.playcountChart}></image>
+	<image x="100" y="150" width="500" height="225" xlink:href={data.playcountChart}></image>
 	<g>
 		<!--footer-->
 		<rect width="600" height="40" x="0" y="360" fill={data.profile_color} rx="10" ry="10"></rect>

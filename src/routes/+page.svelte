@@ -2,10 +2,10 @@
 	import type { FocusEventHandler } from 'svelte/elements';
 	import type { PageProps } from './$types';
 	import { browser } from '$app/environment';
-	import Mania from './optional/mania.svelte';
+	import { fade } from 'svelte/transition';
 
 	let { form }: PageProps = $props();
-	let options = $state({ previousName: '', modeChosen: 'osu' });
+	let options = $state({ previousName: '', helpOpen: false });
 
 	const focus_out: FocusEventHandler<HTMLInputElement> = (event) => {
 		const target = event.target as HTMLInputElement;
@@ -20,20 +20,9 @@
 {#snippet checkbox(gamemode: string, modeName: string, defaultChosen: boolean | null)}
 	<div class="flex flex-row items-center justify-center">
 		{#if defaultChosen}
-			<input
-				type="radio"
-				name="ruleset"
-				checked
-				value={gamemode}
-				onclick={() => (options.modeChosen = gamemode)}
-			/>
+			<input type="radio" name="ruleset" checked value={gamemode} />
 		{:else}
-			<input
-				type="radio"
-				name="ruleset"
-				value={gamemode}
-				onclick={() => (options.modeChosen = gamemode)}
-			/>
+			<input type="radio" name="ruleset" value={gamemode} />
 		{/if}
 
 		<label for="gamemode name">{modeName}</label>
@@ -82,21 +71,39 @@
 	{#if form?.success}
 		<a class="" href={form?.redirectURL} target="_blank">Generate</a>
 	{/if}
-	<div class="text-white">
-		<p>How to Render as an Image:</p>
-		<ol class=" list-decimal">
-			<li>
-				Go to <a
-					class="text-blue-600"
-					href="https://jakearchibald.github.io/svgomg/"
-					title="svg renderer">https://jakearchibald.github.io/svgomg/</a
-				>
-			</li>
-			<li>Paste into "Paste Markup"</li>
-			<li>Press the Download Button</li>
-			<li>
-				Upload to <a class="text-blue-600" href="https://imgbb.com" title="image hoster">IMGBB</a>
-			</li>
-		</ol>
-	</div>
+</div>
+<div class="flex flex-col items-center justify-center gap-2">
+	<button
+		class="border-2 border-amber-50 bg-amber-600 p-2 text-white"
+		type="button"
+		onclick={() => {
+			options.helpOpen = !options.helpOpen;
+			console.log(options.helpOpen);
+		}}>Help</button
+	>
+	{#if options.helpOpen}
+		<div class="text-white" transition:fade>
+			<p>How to Render as an Image:</p>
+			<ol class=" list-decimal">
+				<li>
+					Go to <a
+						class="text-blue-600"
+						href="https://jakearchibald.github.io/svgomg/"
+						target="_blank"
+						title="svg renderer">https://jakearchibald.github.io/svgomg/</a
+					>
+				</li>
+				<li>Paste into "Paste Markup"</li>
+				<li>Press the Download Button</li>
+				<li>
+					Upload to <a
+						class="text-blue-600"
+						target="_blank"
+						href="https://imgbb.com"
+						title="image hoster">IMGBB</a
+					>
+				</li>
+			</ol>
+		</div>
+	{/if}
 </div>
