@@ -35,16 +35,17 @@ const months = [
 ];
 
 export const load: PageServerLoad = async ({ fetch, url }) => {
-	const resp = await fetch('/render', {
+	const resp = await fetch('/render?user=Baconway&mode=osu&dan=1', {
 		method: 'GET'
 	});
 
 	console.log(await resp);
 
-	const re = await fetch('https://renderway.netlify.app/render?user=Baconway&mode=osu&dan=1', {
+	/*const re = await fetch('https://renderway.netlify.app/render?user=Baconway&mode=osu&dan=1', {
 		method: 'GET'
 	});
 	console.log(await re);
+	console.log(await re.json());*/
 
 	const danGET = url.searchParams.get('dan');
 	const rulesetGET = keyToRuleset[url.searchParams.get('mode') as string];
