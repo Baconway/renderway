@@ -67,7 +67,6 @@
 		</div>
 
 		<button type="submit">Generate</button>
-		<Mania></Mania>
 	</form>
 
 	<div
@@ -83,4 +82,21 @@
 	{#if form?.success}
 		<a class="" href={form?.redirectURL} target="_blank">Generate</a>
 	{/if}
+	<div class="text-white">
+		<p>How to Render as an Image:</p>
+		<ol class=" list-decimal">
+			<li>
+				Go to <a
+					class="text-blue-600"
+					href="https://jakearchibald.github.io/svgomg/"
+					title="svg renderer">https://jakearchibald.github.io/svgomg/</a
+				>
+			</li>
+			<li>Paste into "Paste Markup"</li>
+			<li>Press the Download Button</li>
+			<li>
+				Upload to <a class="text-blue-600" href="https://imgbb.com" title="image hoster">IMGBB</a>
+			</li>
+		</ol>
+	</div>
 </div>

@@ -12,7 +12,7 @@ export const actions = {
 		const Result = await userCheck(username);
 
 		if (Result) {
-			redirect_url = `/render/?user=${data.get('name')}&mode=${data.get('ruleset')}&dan=${data.get('dan')}`;
+			redirect_url = `/render/?user=${data.get('name')}&mode=${data.get('ruleset')}`;
 		}
 
 		return { success: Result, redirectURL: redirect_url };

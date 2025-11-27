@@ -2,6 +2,8 @@ import type { PageServerLoad } from '../$types';
 import * as osu from 'osu-api-v2-js';
 
 import { getAPI, hslToHex, getCountryFlag } from '$lib';
+import QuickChart from 'quickchart-js';
+import { json } from '@sveltejs/kit';
 
 const api = getAPI();
 
@@ -35,18 +37,6 @@ const months = [
 ];
 
 export const load: PageServerLoad = async ({ fetch, url }) => {
-	const resp = await fetch('/render?user=Baconway&mode=osu&dan=1', {
-		method: 'GET'
-	});
-
-	console.log(await resp.json());
-
-	const re = await fetch('https://renderway.netlify.app/render?user=Baconway&mode=osu&dan=1', {
-		method: 'GET'
-	});
-	console.log(await re);
-	console.log(await re.json());
-
 	const danGET = url.searchParams.get('dan');
 	const rulesetGET = keyToRuleset[url.searchParams.get('mode') as string];
 	const userGET = await api.getUser(url.searchParams.get('user') as string, rulesetGET);
@@ -54,6 +44,72 @@ export const load: PageServerLoad = async ({ fetch, url }) => {
 	const BestPlays = await api.getUserScores(userGET.id, 'best', rulesetGET);
 	const flagImage = await getCountryFlag(userGET.country_code);
 	const teamInfo = await api.getUsers([userGET.id]);
+	const userPlaycount = userGET.monthly_playcounts;
+
+	let labelsSet: string[] = [];
+
+	interface datasetIF {
+		label: string;
+		data: number[];
+		fill: boolean;
+		borderColor: string | null;
+		pointBackgroundColor: string | null;
+		pointBorderColor: string | null;
+	}
+
+	let dataset: datasetIF = {
+		label: 'Playcount',
+		data: [],
+		fill: false,
+		borderColor: hslToHex(userGET.profile_hue as number, 100, 70),
+		pointBackgroundColor: 'rgba(0, 0, 0, 0)',
+		pointBorderColor: 'rgba(0, 0, 0, 0)'
+	};
+
+	for (let index = 0; index < userPlaycount.length; index++) {
+		const pc = userPlaycount[index];
+		labelsSet.push(`${months[pc.start_date.getUTCMonth()]} ${pc.start_date.getFullYear()}`);
+		dataset.data.push(pc.count);
+	}
+
+	const chart = new QuickChart();
+	chart.setFormat('svg');
+	chart.setBackgroundColor('transparent');
+	chart.setWidth(500);
+	chart.setHeight(185);
+	chart.setDevicePixelRatio(3);
+	chart.setConfig({
+		type: 'line',
+		data: {
+			labels: labelsSet,
+			datasets: [dataset]
+		},
+		options: {
+			legend: {
+				display: false
+			},
+			scales: {
+				yAxes: [
+					{
+						gridlLines: { display: false, lineWidth: 0 },
+						ticks: {
+							fontSize: 10,
+							fontColor: '#ffffff'
+						}
+					}
+				],
+				xAxes: [
+					{
+						gridLines: { display: false, lineWidth: 0 },
+						ticks: {
+							fontSize: 10,
+							fontColor: '#ffffff'
+						}
+					}
+				]
+			}
+		}
+	});
 
 	return {
 		cover: userGET.cover,
@@ -62,7 +118,6 @@ export const load: PageServerLoad = async ({ fetch, url }) => {
 		flag: flagImage.flag,
 		teamFlag: teamInfo[0].team?.flag_url,
 		country: userGET.country.name,
-		danIcon: `/dan/D${danGET}.png`,
 
 		username: userGET.username,
 		currentRank: userGET.statistics.global_rank,
@@ -83,6 +138,8 @@ export const load: PageServerLoad = async ({ fetch, url }) => {
 
 		profile_color: hslToHex(userGET.profile_hue as number, 100, 50),
 		card_color: hslToHex(userGET.profile_hue as number, 100, 15),
-		username_color: hslToHex(userGET.profile_hue as number, 100, 70)
+		username_color: hslToHex(userGET.profile_hue as number, 100, 70),
+
+		playcountChart: chart.getUrl()
 	};
 };
