@@ -39,13 +39,13 @@ export const load: PageServerLoad = async ({ fetch, url }) => {
 		method: 'GET'
 	});
 
-	console.log(await resp);
+	console.log(await resp.json());
 
-	/*const re = await fetch('https://renderway.netlify.app/render?user=Baconway&mode=osu&dan=1', {
+	const re = await fetch('https://renderway.netlify.app/render?user=Baconway&mode=osu&dan=1', {
 		method: 'GET'
 	});
 	console.log(await re);
-	console.log(await re.json());*/
+	console.log(await re.json());
 
 	const danGET = url.searchParams.get('dan');
 	const rulesetGET = keyToRuleset[url.searchParams.get('mode') as string];
