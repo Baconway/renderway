@@ -1,5 +1,5 @@
 <p align="center">
-  <img style="width:256px; height=256px; filter: invert(1);" src="https://i.ibb.co/pB5g9dL5/os.png">
+  <img style="width:512px; height=512px; filter: invert(1);" src="https://i.ibb.co/pB5g9dL5/os.png">
 </p>
 
 # Render some osu! stats as an image!
