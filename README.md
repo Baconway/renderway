@@ -1,3 +1,5 @@
+![logo](https://ibb.co/39QwLcCQ)
+
 # Render some osu! stats as an image!
 Image doesn't update dynamically, so please make a new card whenever your stats change
 
