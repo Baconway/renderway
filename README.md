@@ -1,4 +1,6 @@
-![logo](https://i.ibb.co/pB5g9dL5/os.png)
+<p align="center">
+  <img src="https://i.ibb.co/pB5g9dL5/os.png">
+</p>
 
 # Render some osu! stats as an image!
 Image doesn't update dynamically, so please make a new card whenever your stats change
