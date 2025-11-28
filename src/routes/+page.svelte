@@ -79,31 +79,15 @@
 		onclick={() => {
 			options.helpOpen = !options.helpOpen;
 			console.log(options.helpOpen);
-		}}>Help</button
+		}}>Warning</button
 	>
 	{#if options.helpOpen}
 		<div class="text-white" transition:fade>
-			<p>How to Render as an Image:</p>
-			<ol class=" list-decimal">
-				<li>
-					Go to <a
-						class="text-blue-600"
-						href="https://jakearchibald.github.io/svgomg/"
-						target="_blank"
-						title="svg renderer">https://jakearchibald.github.io/svgomg/</a
-					>
-				</li>
-				<li>Paste into "Paste Markup"</li>
-				<li>Press the Download Button</li>
-				<li>
-					Upload to <a
-						class="text-blue-600"
-						target="_blank"
-						href="https://imgbb.com"
-						title="image hoster">IMGBB</a
-					>
-				</li>
-			</ol>
+			<p>Click on the image to get the image link!</p>
+			<p>
+				Do remember the image doesnt refresh whenever your stats change, so please make a new card
+				when that happens
+			</p>
 		</div>
 	{/if}
 </div>

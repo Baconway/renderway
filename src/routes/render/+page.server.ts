@@ -206,8 +206,7 @@ export const load: PageServerLoad = async ({ fetch, url }) => {
 		}
 	});
 
-	console.log(await re.json());
-
+	const result = await re.json();
 	return {
 		cover: userGET.cover,
 		avatar_url: userGET.avatar_url,
@@ -237,6 +236,7 @@ export const load: PageServerLoad = async ({ fetch, url }) => {
 		card_color: hslToHex(userGET.profile_hue as number, 100, 15),
 		username_color: hslToHex(userGET.profile_hue as number, 100, 70),
 
-		playcountChart: chart.getUrl()
+		playcountChart: chart.getUrl(),
+		cardLink: result.url
 	};
 };
