@@ -39,6 +39,7 @@
 
 			delCall();
 			window.localStorage.removeItem('imgLink');
+			alert('Image link has been successfully deleted!');
 		}
 	}
 </script>
