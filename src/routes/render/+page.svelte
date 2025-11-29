@@ -1,7 +1,30 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
+
+	/*if (browser) {
+		alert(
+			'Image is deleted on the server when you refresh, please save your card before refreshing/closing!'
+		);
+		if (window.localStorage.getItem('imgLink')) {
+			const delCall = async () => {
+				await fetch('/render', {
+					method: 'POST',
+					body: JSON.stringify(window.localStorage.getItem('imgLink')),
+					headers: {
+						'Content-Type': 'application/json'
+					}
+				});
+			};
+
+			delCall();
+			window.localStorage.removeItem('imgLink');
+		} else {
+			window.localStorage.setItem('imgLink', data.cardLink);
+		}
+	}*/
 </script>
 
 <a href={data.cardLink} title="click to get the image link!">

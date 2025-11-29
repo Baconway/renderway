@@ -3,7 +3,6 @@ import * as osu from 'osu-api-v2-js';
 
 import { getAPI, hslToHex, getCountryFlag } from '$lib';
 import QuickChart from 'quickchart-js';
-import { json } from '@sveltejs/kit';
 import { IMG_API_KEY, IMG_USER_ID } from '$env/static/private';
 
 const api = getAPI();
@@ -205,8 +204,8 @@ export const load: PageServerLoad = async ({ fetch, url }) => {
 			Authorization: 'Basic ' + btoa(IMG_USER_ID + ':' + IMG_API_KEY)
 		}
 	});
-
 	const result = await re.json();
+
 	return {
 		cover: userGET.cover,
 		avatar_url: userGET.avatar_url,

@@ -1,0 +1,21 @@
+/*if (browser) {
+		alert(
+			'Image is deleted on the server when you refresh, please save your card before refreshing/closing!'
+		);
+		if (window.localStorage.getItem('imgLink')) {
+			const delCall = async () => {
+				await fetch('/render', {
+					method: 'POST',
+					body: JSON.stringify(window.localStorage.getItem('imgLink')),
+					headers: {
+						'Content-Type': 'application/json'
+					}
+				});
+			};
+
+			delCall();
+			window.localStorage.removeItem('imgLink');
+		} else {
+			window.localStorage.setItem('imgLink', data.cardLink);
+		}
+	}*/
