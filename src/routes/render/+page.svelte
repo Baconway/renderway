@@ -3,9 +3,15 @@
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
+
+	if (browser) {
+		if (!window.localStorage.getItem('imgLink')) {
+			window.localStorage.setItem('imgLink', data.cardLink);
+		}
+	}
 </script>
 
-<a href={data.cardLink} title="click to get the image link!">
+<a href={data.cardLink} target="_blank" title="click to get the image link!">
 	<svg
 		id="svg"
 		width="600"

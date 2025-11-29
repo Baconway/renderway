@@ -14,14 +14,31 @@
 
 	if (browser) {
 		options.previousName = window.localStorage.getItem('inputBox') as string;
+		console.log(window.localStorage.getItem('imgLink'));
 	}
-	console.log(browser);
+
 	function themeChange() {
-		console.log(document.documentElement.className);
 		if (document.documentElement.className == 'dark') {
 			document.documentElement.className = 'light';
 		} else {
 			document.documentElement.className = 'dark';
+		}
+	}
+
+	function delImageLink() {
+		if (window.localStorage.getItem('imgLink')) {
+			const delCall = async () => {
+				await fetch('/render', {
+					method: 'POST',
+					body: JSON.stringify(window.localStorage.getItem('imgLink')),
+					headers: {
+						'Content-Type': 'application/json'
+					}
+				});
+			};
+
+			delCall();
+			window.localStorage.removeItem('imgLink');
 		}
 	}
 </script>
@@ -90,24 +107,38 @@
 	{/if}
 </div>
 
-<button class="absolute top-0 right-0" type="button" onclick={() => themeChange()}
-	><img class="h-16 w-16 invert" src="/themeSwitch.svg" alt="switch theme" /></button
+<button
+	class="absolute top-5 right-5 rounded-2xl border-4 dark:border-white"
+	type="button"
+	onclick={() => themeChange()}
+	><img class="h-16 w-16 dark:invert" src="/themeSwitch.svg" alt="switch theme" /></button
 >
+
+<button
+	class="absolute top-25 right-5 border-3 border-black bg-red-600 p-2 text-white dark:border-white"
+	type="button"
+	onclick={() => delImageLink()}
+>
+	Delete Previous Image
+</button>
+
 <div class="mt-2 flex flex-col items-center justify-center gap-2">
 	<button
-		class="border-2 border-amber-50 bg-amber-600 p-2 text-white"
+		class="dark:border-dark border-4 border-dashed bg-[#fef200] p-2 text-3xl font-bold text-black"
 		type="button"
 		onclick={() => {
 			options.helpOpen = !options.helpOpen;
 		}}>Warning</button
 	>
 	{#if options.helpOpen}
-		<div class="flex flex-col items-center justify-center text-white" transition:fade>
+		<div class="flex flex-col items-center justify-center text-lg dark:text-white" transition:fade>
 			<p>Click on the image to get the image link!</p>
 			<p>
 				Do remember the image doesnt refresh whenever your stats change, so please make a new card
 				when that happens
 			</p>
+			<p>It's recommended you delete the Previous image link (dont flood my api cap pls)</p>
+			<p class="text-3xl">Thanks for using this website!</p>
 		</div>
 	{/if}
 </div>
