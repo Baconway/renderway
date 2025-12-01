@@ -72,7 +72,9 @@
 				<text x="375" y="89.5" font-size="15" fill="white">Mode:</text>
 				<text x="420" y="89.5" font-size="15" fill="white">{data.modeName}</text>
 				<text x="375" y="120" font-size="15" fill="white">Discord:</text>
-				<text x="432" y="120" font-size="15" fill="white">{data.discord}</text>
+				<text x="432" y="120" font-size="15" fill="white"
+					>{data.discord ? `${data.discord}` : 'None'}</text
+				>
 				<text x="375" y="150" fill="white" font-size="18">{data.pp} pp</text>
 			</g>
 			<!--top play, level, playtime-->

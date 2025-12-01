@@ -3,7 +3,7 @@ import * as osu from 'osu-api-v2-js';
 
 import { getAPI, hslToHex, getCountryFlag } from '$lib';
 import QuickChart from 'quickchart-js';
-import { IMG_API_KEY, IMG_USER_ID } from '$env/static/private';
+import { IMG_API_KEY, IMG_USER_ID, IMGBB_KEY } from '$env/static/private';
 
 const api = getAPI();
 
@@ -204,8 +204,16 @@ export const load: PageServerLoad = async ({ fetch, url }) => {
 			Authorization: 'Basic ' + btoa(IMG_USER_ID + ':' + IMG_API_KEY)
 		}
 	});
-	const result = await re.json();
+	const result = await re.json(); //gets the shot of the website from here
 
+	const dataBody = new FormData();
+	dataBody.append('image', result.url);
+
+	const uploadResp = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_KEY}`, {
+		method: 'POST',
+		body: dataBody,
+		headers: {}
+	});
 	return {
 		cover: userGET.cover,
 		avatar_url: userGET.avatar_url,
@@ -231,11 +239,11 @@ export const load: PageServerLoad = async ({ fetch, url }) => {
 		pp: Math.round(userGET.statistics.pp as number),
 		bestPlay: Math.round(BestPlays[0].pp as number),
 
-		profile_color: hslToHex(userGET.profile_hue as number, 100, 50),
+		profile_color: hslToHex(userGET.profile_hue as number, 100, 35),
 		card_color: hslToHex(userGET.profile_hue as number, 100, 15),
-		username_color: hslToHex(userGET.profile_hue as number, 100, 70),
+		username_color: hslToHex(userGET.profile_hue as number, 100, 60),
 
 		playcountChart: chart.getUrl(),
-		cardLink: result.url
+		cardLink: (await uploadResp.json()).data.url //uploaded to imgbb
 	};
 };

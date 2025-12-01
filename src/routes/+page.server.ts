@@ -10,11 +10,12 @@ export const actions = {
 		const username = data.get('name') as string;
 
 		const Result = await userCheck(username);
-
-		if (Result) {
+		if (Result.success) {
 			redirect_url = `/render/?user=${data.get('name')}&mode=${data.get('ruleset')}`;
+		} else {
+			redirect_url = '/';
 		}
 
-		return { success: Result, redirectURL: redirect_url };
+		return { foundPlayer: Result.success, redirectURL: redirect_url };
 	}
 } satisfies Actions;

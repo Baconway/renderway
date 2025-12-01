@@ -65,7 +65,7 @@
 		action="?/submit"
 	>
 		<label for="username showcase">
-			{#if form?.success}
+			{#if form?.foundPlayer == true}
 				Username Inputted:
 				{options.previousName}
 			{:else}
@@ -87,21 +87,11 @@
 			{@render checkbox('fruits', 'osu!catch', false)}
 		</div>
 
-		{#if !form?.success}
+		{#if !form?.foundPlayer}
 			<button class="w-full border-2 dark:border-white" type="submit">Check</button>{/if}
 	</form>
 
-	<!--<div
-		class="flex flex-col gap-5
-	md:flex-row
-	"
-	>
-		<button><img alt="template" /></button>
-		<button><img alt="template" /></button>
-		<button><img alt="template" /></button>
-	</div>-->
-
-	{#if form?.success}
+	{#if form?.foundPlayer}
 		<a class="border-2 pr-5 pl-5 dark:border-white" href={form?.redirectURL} target="_blank"
 			>Generate</a
 		>
