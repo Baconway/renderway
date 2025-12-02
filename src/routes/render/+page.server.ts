@@ -178,7 +178,7 @@ export const load: PageServerLoad = async ({ fetch, url }) => {
 			<text x="375" y="89.5" font-size="15" fill="white">Mode:</text>
 			<text x="420" y="89.5" font-size="15" fill="white">${playmodeToGamemodeName[url.searchParams.get('mode') as string]}</text>
 			<text x="375" y="120" font-size="15" fill="white">Discord:</text>
-			<text x="432" y="120" font-size="15" fill="white">${userGET.discord}</text>
+			<text x="435" y="120" font-size="15" fill="white">${userGET.discord}</text>
 			<text x="375" y="150" fill="white" font-size="18">${Math.round(userGET.statistics.pp as number)} pp</text>
 		</g>
 		<!--top play, level, playtime-->
