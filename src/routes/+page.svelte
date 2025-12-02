@@ -56,7 +56,7 @@
 	</div>
 {/snippet}
 
-<div class="dark: flex flex-col items-center justify-center gap-10 dark:text-white">
+<div class="dark: flex flex-col items-center justify-center gap-5 dark:text-white">
 	<img class="mt-5 h-64 w-64 dark:invert" src="/os.png" alt="logo" />
 	<form
 		class="flex flex-col gap-2 border-2 p-2 dark:border-white"
@@ -90,7 +90,18 @@
 		{#if !form?.foundPlayer}
 			<button class="w-full border-2 dark:border-white" type="submit">Check</button>{/if}
 	</form>
-
+	<div class=" flex flex-row gap-2">
+		<img
+			class="h-40 w-60 object-contain duration-200 hover:h-60 hover:w-90"
+			src="/template/playcount.png"
+			alt="template 1"
+		/>
+		<img
+			class="h-40 w-60 object-contain duration-200 hover:h-60 hover:w-90"
+			src="/template/playcount.png"
+			alt="template 2"
+		/>
+	</div>
 	{#if form?.foundPlayer}
 		<a class="border-2 pr-5 pl-5 dark:border-white" href={form?.redirectURL} target="_blank"
 			>Generate</a
