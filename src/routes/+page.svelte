@@ -14,7 +14,6 @@
 
 	if (browser) {
 		options.previousName = window.localStorage.getItem('inputBox') as string;
-		console.log(window.localStorage.getItem('imgLink'));
 	}
 
 	function themeChange() {
@@ -86,22 +85,31 @@
 			{@render checkbox('taiko', 'osu!taiko', false)}
 			{@render checkbox('fruits', 'osu!catch', false)}
 		</div>
+		<div class=" flex flex-row gap-2">
+			<label class="hover:cursor-pointer">
+				Playcount
+				<input class="peer hidden" type="radio" name="graphType" value="playcount" checked />
+				<img
+					class="h-40 w-60 border-2 object-contain duration-200 peer-checked:border-amber-600 hover:h-60 hover:w-90"
+					src="/template/playcount.png"
+					alt="template 1"
+				/>
+			</label>
+			<label class="hover:cursor-pointer">
+				Rank History
+				<input class="peer hidden" type="radio" name="graphType" value="rankHistory" />
+				<img
+					class="h-40 w-60 border-2 object-contain duration-200 peer-checked:border-amber-600 hover:h-60 hover:w-90"
+					src="/template/playcount.png"
+					alt="template 2"
+				/>
+			</label>
+		</div>
 
 		{#if !form?.foundPlayer}
 			<button class="w-full border-2 dark:border-white" type="submit">Check</button>{/if}
 	</form>
-	<div class=" flex flex-row gap-2">
-		<img
-			class="h-40 w-60 object-contain duration-200 hover:h-60 hover:w-90"
-			src="/template/playcount.png"
-			alt="template 1"
-		/>
-		<img
-			class="h-40 w-60 object-contain duration-200 hover:h-60 hover:w-90"
-			src="/template/playcount.png"
-			alt="template 2"
-		/>
-	</div>
+
 	{#if form?.foundPlayer}
 		<a class="border-2 pr-5 pl-5 dark:border-white" href={form?.redirectURL} target="_blank"
 			>Generate</a

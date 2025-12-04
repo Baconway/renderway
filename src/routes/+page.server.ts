@@ -8,10 +8,10 @@ export const actions = {
 
 		const data: FormData = await request.formData();
 		const username = data.get('name') as string;
-
+		console.log(data);
 		const Result = await userCheck(username);
 		if (Result.success) {
-			redirect_url = `/render/?user=${data.get('name')}&mode=${data.get('ruleset')}`;
+			redirect_url = `/render/?user=${data.get('name')}&mode=${data.get('ruleset')}&graphType=${data.get('graphType')}`;
 		} else {
 			redirect_url = '/';
 		}

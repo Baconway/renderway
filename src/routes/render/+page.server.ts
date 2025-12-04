@@ -164,7 +164,7 @@ function createRankChart(profile_hue: number, rankHistoryData: Array<number>) {
 }
 
 export const load: PageServerLoad = async ({ fetch, url }) => {
-	const danGET = url.searchParams.get('dan');
+	const graphType = url.searchParams.get('graphType');
 	const rulesetGET = keyToRuleset[url.searchParams.get('mode') as string];
 	const userGET = await api.getUser(url.searchParams.get('user') as string, rulesetGET);
 
@@ -190,10 +190,19 @@ export const load: PageServerLoad = async ({ fetch, url }) => {
 		dataset.data.push(pc.count);
 	}
 
-	const chart = createRankChart(
-		userGET.profile_hue as number,
-		userGET.rank_history?.data as Array<number>
-	); //createPlaycountChart(userGET.profile_hue as number, userPlaycount);
+	let chart: QuickChart = createPlaycountChart(userGET.profile_hue as number, userPlaycount);
+
+	switch (graphType) {
+		case 'playcount':
+			chart = createPlaycountChart(userGET.profile_hue as number, userPlaycount);
+			break;
+		case 'rankHistory':
+			chart = createRankChart(
+				userGET.profile_hue as number,
+				userGET.rank_history?.data as Array<number>
+			);
+			break;
+	}
 
 	const profile_color = hslToHex(userGET.profile_hue as number, 100, 35);
 	const card_color = hslToHex(userGET.profile_hue as number, 100, 15);
