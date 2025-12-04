@@ -111,8 +111,11 @@
 	</form>
 
 	{#if form?.foundPlayer}
-		<a class="border-2 pr-5 pl-5 dark:border-white" href={form?.redirectURL} target="_blank"
-			>Generate</a
+		<a
+			class="border-2 pr-5 pl-5 dark:border-white"
+			href={form?.redirectURL}
+			target="_blank"
+			onclick={() => window.location.reload()}>Generate</a
 		>
 	{/if}
 </div>
