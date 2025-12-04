@@ -6,4 +6,4 @@
 Image doesn't update dynamically, so please make a new card whenever your stats change
 
 # Example Card
-![example image](https://hcti.io/v1/image/c7aa08e5-43c4-4c62-994d-4c7cda5f3db4)
+![example image](https://i.ibb.co/1ckYbfs/0f0f51d2-bdbb-48a4-9bac-6946b3fe9f77.png)
