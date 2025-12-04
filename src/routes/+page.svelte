@@ -147,7 +147,7 @@
 				Do remember the image doesnt refresh whenever your stats change, so please make a new card
 				when that happens
 			</p>
-			<p>It's recommended you delete the Previous image link (dont flood my api cap pls)</p>
+			<p>(dont flood my api cap pls)</p>
 			<p class="text-3xl">Thanks for using this website!</p>
 		</div>
 	{/if}
