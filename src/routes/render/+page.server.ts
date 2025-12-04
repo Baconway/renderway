@@ -190,7 +190,7 @@ export const load: PageServerLoad = async ({ fetch, url }) => {
 		dataset.data.push(pc.count);
 	}
 
-	let chart: QuickChart = createPlaycountChart(userGET.profile_hue as number, userPlaycount);
+	let chart = createPlaycountChart(userGET.profile_hue as number, userPlaycount);
 
 	switch (graphType) {
 		case 'playcount':

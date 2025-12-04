@@ -100,7 +100,7 @@
 				<input class="peer hidden" type="radio" name="graphType" value="rankHistory" />
 				<img
 					class="h-40 w-60 border-2 object-contain duration-200 peer-checked:border-amber-600 hover:h-60 hover:w-90"
-					src="/template/playcount.png"
+					src="/template/rank.png"
 					alt="template 2"
 				/>
 			</label>
