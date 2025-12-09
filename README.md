@@ -4,7 +4,7 @@
 
 # Render some osu! stats as an image!
 Image doesn't update dynamically, so please make a new card whenever your stats change
-#.env setup
+# .env setup
 your env should look like this:
 ```
 OSU_CLIENT_SECRET="your_osu_client_secret_(https://osu.ppy.sh)"
