@@ -13,4 +13,4 @@ IMG_USER_ID="your_hcti_uid(https://htmlcsstoimage.com/dashboard/api-keys)"
 IMG_API_KEY="your_htci_key(https://htmlcsstoimage.com/dashboard/api-keys)"
 ```
 # Example Card
-![example image](https://i.ibb.co/1ckYbfs/0f0f51d2-bdbb-48a4-9bac-6946b3fe9f77.png)
+![example image](https://i.ibb.co/xqLsqkVg/37d5329d-7c77-4320-9a9d-74f3ddae92d3.png)
